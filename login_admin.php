@@ -1,37 +1,32 @@
-<?php
-// Conectar a la base de datos
-$servername = "localhost";
-$username = "tu_usuario";
-$password = "tu_contraseña";
-$dbname = "tu_base_de_datos";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
 
-if ($conn->connect_error) {
-    die("Error al conectar a la base de datos: " . $conn->connect_error);
-}
+</head>
+<body>
+<form action="login_empleados.php" method="POST">
+        <div class="campo">
+            <label class="correo" for="correo_empleado">Correo:</label>
+            <input type="text" id="correo_empleado" name="correo_empleado" required>
+        </div>
+        
+        <div class="campo">
+            <label class="contrasena" for="contrasena_empleado">Contraseña:</label>
+            <input type="password" id="contrasena_empleado" name="contrasena_empleado" required>
+        </div>
+        
+        <button class="boton" type="submit"><span>Ingresar como Administrador</span></button>
+    </form>
 
-// Recuperar las credenciales del formulario
-$correo = $_POST["correo"];
-$contrasena = $_POST["contrasena"];
-
-// Verificar las credenciales en la base de datos (debes tener una tabla "administradores" con campos "correo" y "contrasena")
-$query = "SELECT * FROM administradores WHERE correo='$correo' AND contrasena='$contrasena'";
-$result = $conn->query($query);
-
-if ($result->num_rows == 1) {
-    // Inicio de sesión exitoso, redirigir a la página de administradores
-    header("Location: pagina_administrador.php");
-} else {
-    // Las credenciales son incorrectas, mostrar un mensaje de error
-    echo "Credenciales incorrectas. <a href='index.php'>Volver</a>";
-}
-
-$conn->close();
-?>
-
-
-
+    <!-- Enlace para iniciar sesión como administrador -->
+    <p><a href="login_empleados.php">Ingresar como Administrador</a></p>
+</body>
+</html>
 
 
 
