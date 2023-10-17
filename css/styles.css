@@ -374,4 +374,26 @@ nav.close ~ .dashboard .top{
     background-color: var(--box3-color);
 
 }
+/* Estilos de la sección Permisos */
 
+.container-perms{
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+}
+
+.div-1{
+    margin-top: 80px;
+    gap: 10px;
+}
+
+.div-1 > p{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+}
+
+.div-1 .arrow{
+    font-size: 30px;
+}
