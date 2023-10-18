@@ -33,22 +33,30 @@
                     <span class="links-name">
                         Empleado
                     </span>
-                    <select class="links-name" onchange="redirectToForm(this.value)">
+                    <select class="links-name" id="selectOption" onchange="redirectToForm()">
                         <option value="" disabled selected>Ver</option>
                         <option value="agregar">Agregar Empleado</option>
                         <option value="ver">Ver Empleado</option>
                     </select>
-
-                    <script>
-                    function redirectToForm(optionValue) {
-                        if (optionValue === "agregar") {
-                            window.location.href = "form.php"; // Redirige a la página del formulario PHP
-                        }
-                        // Puedes agregar más condiciones aquí para otras opciones si es necesario
-                    }
-                    </script>
-
                 </a>
+            </li>
+
+            <script>
+            function redirectToForm() {
+                var selectElement = document.getElementById("selectOption");
+                var optionValue = selectElement.value;
+
+                if (optionValue === "agregar") {
+                    window.location.href = "form.php"; // Redirige a la página para agregar empleado
+                } else if (optionValue === "ver") {
+                    window.location.href = "ver_empleado.php"; // Redirige a la página para ver empleado
+                }
+                // Puedes agregar más condiciones aquí para otras opciones si es necesario
+            }
+            </script>
+
+
+            </a>
             </li>
             <!--iconos3-->
             <li>
@@ -111,9 +119,17 @@
     </div>
 </nav>
 <section class="dashboard">
+    <<<<<<< HEAD=======<div class="top">
+        <i class='bx bx-menu sidebar-toggle'></i>
+        <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="Search here...">
+        </div>
+        <img src="../images/porfile.jpeg" alt="">
+        </div>
 
-
-    <!-- <div class="loader-bg"></div>
+        >>>>>>> d2ee74582dc83e430cfa210d0e5b8c0b0e0455de
+        <!-- <div class="loader-bg"></div>
         <div class="loader">
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue">
