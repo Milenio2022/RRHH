@@ -40,12 +40,12 @@
                     </select>
 
                     <script>
-                        function redirectToForm(optionValue) {
-                            if (optionValue === "agregar") {
-                                window.location.href = "form.php"; // Redirige a la página del formulario PHP
-                            }
-                            // Puedes agregar más condiciones aquí para otras opciones si es necesario
+                    function redirectToForm(optionValue) {
+                        if (optionValue === "agregar") {
+                            window.location.href = "form.php"; // Redirige a la página del formulario PHP
                         }
+                        // Puedes agregar más condiciones aquí para otras opciones si es necesario
+                    }
                     </script>
 
                 </a>
@@ -111,16 +111,9 @@
     </div>
 </nav>
 <section class="dashboard">
-        <div class="top">
-            <i class='bx bx-menu sidebar-toggle'></i>
-            <div class="search-box">
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search here...">
-            </div>
-            <img src="../images/porfile.jpeg" alt="">
-        </div>
 
-<!-- <div class="loader-bg"></div>
+
+    <!-- <div class="loader-bg"></div>
         <div class="loader">
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue">
