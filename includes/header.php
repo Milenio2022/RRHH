@@ -47,6 +47,14 @@
                             // Puedes agregar más condiciones aquí para otras opciones si es necesario
                         }
                     </script>
+                    <script>
+                        function redirectToForm(optionValue) {
+                            if (optionValue === "ver") {
+                                window.location.href = "ver_empleado.php"; // Redirige a la página del formulario PHP
+                            }
+                            // Puedes agregar más condiciones aquí para otras opciones si es necesario
+                        }
+                    </script>
 
                 </a>
             </li>
@@ -111,16 +119,16 @@
     </div>
 </nav>
 <section class="dashboard">
-        <div class="top">
-            <i class='bx bx-menu sidebar-toggle'></i>
-            <div class="search-box">
-                <i class='bx bx-search'></i>
-                <input type="text" placeholder="Search here...">
-            </div>
-            <img src="../images/porfile.jpeg" alt="">
+    <div class="top">
+        <i class='bx bx-menu sidebar-toggle'></i>
+        <div class="search-box">
+            <i class='bx bx-search'></i>
+            <input type="text" placeholder="Search here...">
         </div>
+        <img src="../images/porfile.jpeg" alt="">
+    </div>
 
-<!-- <div class="loader-bg"></div>
+    <!-- <div class="loader-bg"></div>
         <div class="loader">
             <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue">
