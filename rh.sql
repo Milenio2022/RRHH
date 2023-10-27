@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `empleados`
+-- Estructura de tabla para la tabla `employee`
 --
 
-CREATE TABLE `empleados` (
+CREATE TABLE `employee` (
   `empid` int(11) NOT NULL,
   `pfimg` varchar(255) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
@@ -56,9 +56,9 @@ CREATE TABLE `empleados` (
 --
 
 --
--- Indices de la tabla `empleados`
+-- Indices de la tabla `employee`
 --
-ALTER TABLE `empleados`
+ALTER TABLE `employee`
   ADD PRIMARY KEY (`empid`);
 
 --
@@ -68,7 +68,7 @@ ALTER TABLE `empleados`
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
-ALTER TABLE `empleados`
+ALTER TABLE `employee`
   MODIFY `empid` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
