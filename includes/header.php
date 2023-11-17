@@ -14,7 +14,7 @@
                 <a href="#">
                     <i class='bx bx-home-alt'></i>
                     <span class="links-name">
-                        Dashboard
+                        Inicio
                     </span>
                 </a>
             </li>
@@ -44,18 +44,12 @@
                             if (optionValue === "agregar") {
                                 window.location.href = "form.php"; // Redirige a la página del formulario PHP
                             }
-                            // Puedes agregar más condiciones aquí para otras opciones si es necesario
-                        }
-                    </script>
-                    <script>
-                        function redirectToForm(optionValue) {
-                            if (optionValue === "ver") {
+                            else if (optionValue === "ver") {
                                 window.location.href = "ver_empleado.php"; // Redirige a la página del formulario PHP
                             }
                             // Puedes agregar más condiciones aquí para otras opciones si es necesario
                         }
                     </script>
-
                 </a>
             </li>
             <!--iconos3-->

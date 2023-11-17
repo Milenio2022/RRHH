@@ -2,7 +2,7 @@
 // Código de conexión a la base de datos (conexion.php)
 
 try {
-    $conexion = new PDO("mysql:host=localhost;dbname=rh;charset=utf8", "root", "");
+    $conexion = new PDO("mysql:host=localhost;dbname=rrhh;charset=utf8", "root", "");
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     echo "Conexion realizada";
 } catch (PDOException $error) {

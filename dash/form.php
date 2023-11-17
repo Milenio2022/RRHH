@@ -18,8 +18,8 @@
     
 
 <?php include '../includes/header.php'?>
-    <div class="container mt-5">
-        <h2>Formulario de Registro</h2>
+    <div class="container pt-5">
+        <h2 class="pt-5">Formulario de Registro</h2>
         <form action="procesar_registro.php" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-md-4 mb-3">
