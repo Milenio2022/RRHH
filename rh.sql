@@ -64,7 +64,7 @@ CREATE TABLE `departamento` (
 --
 
 CREATE TABLE `empleado` (
-  `id` int(11) NOT NULL,
+  `id_empleado` int(11) NOT NULL,
   `nombre` varchar(255) DEFAULT NULL,
   `apellido` varchar(255) DEFAULT NULL,
   `fecha_nacimiento` datetime DEFAULT NULL,
