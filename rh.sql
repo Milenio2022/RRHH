@@ -105,6 +105,22 @@ CREATE TABLE `historial_laboral` (
   `id_empleado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `solicitudes_permiso`
+--
+
+CREATE TABLE `solicitudes_permiso` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) NOT NULL,
+  `motivo` varchar(100) NOT NULL,
+  `fecha_inicio` date NOT NULL,
+  `fecha_fin` date NOT NULL,
+  `estado` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
