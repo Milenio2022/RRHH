@@ -1,0 +1,49 @@
+.pdt-5{
+    padding-top: 60px;
+}
+
+
+
+/*TABLA*/
+.contenedor-tabla {
+    width: 100%;
+}
+
+.header-cell {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.table-cell {
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 50px;
+}
+
+.table-cell:not(:nth-child(2)):not(:nth-child(3)) {
+    background-color: rgba(169, 169, 169, 0.5);
+}
+
+.btn-tabla{
+    padding-top: 10px;
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.green-bg {
+    background-color: green;
+}
+
+.red-bg {
+    background-color: red;
+}
+
+.yellow-bg {
+    background-color: yellow;
+}
+
+.lightblue-bg {
+    background-color: lightblue;
+}

@@ -1,0 +1,399 @@
+/*fuente de texto*/
+@import url('https://fonts.googleapis.com/css2?family=Croissant+One&family=Dancing+Script:wght@400;500;600&family=PT+Serif&family=Poor+Story&family=Poppins:ital,wght@0,100;1,200&family=Quicksand:wght@300;400;700&family=Raleway:wght@200;300;400&family=Roboto:ital,wght@0,400;0,500;0,700;1,300&family=Ysabeau+Office:ital,wght@1,100;1,200;1,300;1,500&display=swap');
+
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Croissant One', cursive;
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Poor Story', cursive;
+    font-family: 'Poppins', sans-serif;
+    font-family: 'PT Serif', serif;
+    font-family: 'Quicksand', sans-serif;
+    font-family: 'Raleway', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-family: 'Ysabeau Office', sans-serif;
+}
+:root{
+    /*Colores del menu*/
+    --primary-color:#94dbe7;
+    --panel-color:#f7f7f7;
+    --black-color-light:#52bec8;
+    --border-color:#97999b;
+    --toggle-color:#bec2c4;
+    --tex-color:#494646;
+    --box1-color:#4da3ff;
+    --box2-color:#b2b0b4;
+    --box3-color:#d3c0f1;
+    --title-icon-color:#f1efed;
+
+
+
+    /* Transition del menu*/
+    --tran-05:all 0.5s ease;
+    --tran-03:all 0.3s ease;
+    --tran-03:all 0.2s ease;
+
+
+}
+body{
+    min-height: 100vh;
+    background-color: var(--primary-color);
+}
+body.dark{
+    --primary-color:#3A3B3C;
+    --panel-color:#242526;
+    --border-color:#6b6b6b;
+    --black-color-light:#CCC;
+    --toggle-color:#FFF;
+    --tex-color:#CCC;
+    --box1-color:#3A3B3C;
+    --box2-color:#3A3B3C;
+    --box3-color:#3A3B3C;
+    --title-icon-color:#CCC;
+
+}
+/* Estilos para el titulo */
+h1 {
+    background-color: var(--panel-color);
+    margin-top: 70px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    justify-items: center;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 230px;
+    padding: 10px 12px;
+    background-color: var(--panel-color);
+    border-right: 1px solid var(--border-color);
+    transition: var(--tran-05);
+}
+nav.close{
+    width: 73px;
+
+}
+nav .logo-name {
+    display: flex;
+    align-items: center;
+}
+nav .logo-image {
+    display: flex;
+    justify-content: center;
+    min-width: 45px;
+
+}
+nav .logo-image img {
+    width: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+nav .logo-name .logo_name {
+    font-size: 22px;
+    font-weight:600;
+    color: var(--tex-color);
+    margin-left: 14px;
+    transition: var(--tran-05);
+}
+nav.close .logo-name{
+    opacity: 0;
+    pointer-events: none;
+}
+nav .menu-items{
+    margin-top: 40px;
+    height: calc(100% - 90px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+.menu-items li{
+    list-style: none;
+
+}
+.menu-items li a{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    text-decoration: none;
+    position: relative;
+}
+.nav-links li a:hover:before{
+    content: "";
+    position: absolute;
+    left: -7px;
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+}
+body.dark li a:hover:before{
+    background-color: var(--tex-color);
+}
+.menu-items li a i{
+    font-size: 22px;
+    min-width: 45px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black-color-light);
+
+}
+.menu-items li a .links-name{
+    font-size: 18px;
+    font-weight:400;
+    color: var(--black-color-light);
+    transition: var(--tran-05);
+}
+nav.close li a .links-name{
+    opacity: 0;
+    pointer-events: none;
+}
+.nav-links li a:hover i,
+.nav-links li a:hover .links-name{
+        color: var(--primary-color);
+}
+body.dark li a:hover i,
+body.dark li a:hover .links-name{
+        color: var(--primary-color);
+}
+.menu-items .mode{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+
+}
+.menu-items .logout-mode{
+    border-top: 1px solid var(--border-color);
+    padding-top: 10px;
+}
+
+.menu-items .mode-toggle{
+    position: absolute;
+    right: 12px;
+    height: 40px;
+    min-width:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+}
+.mode-toggle .switch{
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    width: 40px;
+    border-radius: 25px;
+    background-color: var(--toggle-color);
+
+
+}
+.switch:before{
+    content: "";
+    position: absolute;
+    left: 5px;
+    top:50%;
+    transform: translateY(-50%);
+    height: 15px;
+    width: 15px;
+    background-color: var(--panel-color);
+    border-radius: 50%;
+    transition: var(--tran-03);
+}
+body.dark .switch:before{
+    left: 20px;
+
+
+}
+
+/* Estilo para el menú desplegable */
+.links-name + select {
+    padding: 3px;
+    width:20px;
+    height: 22px;
+    margin-top: 5px;
+    border-radius: 100%;
+    border: none;
+    background-color: var(--panel-color);
+}
+
+.dashboard{
+    position: relative;
+    left:  230px;
+    background-color: var(--panel-color);
+    min-height:100vh;
+    width: calc(100% - 230px);
+    padding: 10px 14px;
+    transition: var(--tran-05);
+
+}
+nav.close ~ .dashboard{
+    left: 73px;
+    width: calc(100% - 73px);
+
+}
+.dashboard .top{
+    top: 0;
+    position: fixed;
+    left: 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 230px);
+    padding: 10px 14px;
+    background-color: var(--panel-color);
+    transition: var(--tran-05);
+}
+nav.close ~ .dashboard .top{
+    left: 73px;
+    width: calc(100% - 73px);
+
+}
+.dashboard .top .sidebar-toggle{
+    font-size: 26px;
+    color: var(--tex-color);
+    cursor: pointer;
+}
+.dashboard .top .search-box{
+    position: relative;
+    height: 45px;
+    min-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+
+
+}
+/* Estilo para BUSCADOR  */
+.top .search-box input{
+    height: 100%;
+    border: 1px solid var(--border-color);
+    background-color: var(--panel-color);
+    padding: 0 25px 0 50px;
+    width: 100%;
+    position: absolute;
+    border-radius: 5px;
+    color: var(--tex-color);
+    font-size: 15px;
+    font-weight: 400;
+    outline: none;
+
+
+}
+.top .search-box i{
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform:translateY(-50%);
+    color: var(--black-color-light);
+    
+}
+/* Estilos de Dashboard Menu*/
+.top img{
+    width: 56px;
+    border-radius: 50%;
+    height: 60px;
+}
+.dashboard .dash-content{
+    padding-top: 0;
+
+
+}
+.dash-content .title{
+    display: flex;
+    align-items: center;
+    margin: 60px 0 30px 0;
+
+}
+.dash-content .title i{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    border-radius: 6px;
+    background-color: var(--primary-color);
+    color: var(--title-icon-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+.dash-content .title .text{
+    font-size: 24px;
+    font-weight:500;
+    color: var(--tex-color);
+    margin-left: 10px;
+}
+.dash-content .boxes{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.dash-content .boxes .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    width: calc(100% / 3 - 15px);
+    padding: 15px 20px;
+    background-color: var(--box1-color);
+}
+.boxes i{
+    font-size: 35px;
+    color: var(--tex-color);
+}
+.boxes .text{
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--tex-color);
+}
+.boxes .box .number{
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--tex-color);
+    
+}
+/* Estilos de Dashboard Menu----
+--EMPLEADO-SOLICITUD DE PERMISOS Y TOTAL DE LKES*/
+.boxes .box.box2{
+    background-color: var(--box2-color);
+
+}
+.boxes .box.box3{
+    background-color: var(--box3-color);
+
+}
+/* Estilos de la sección Permisos */
+
+.container-perms{
+    padding: 0 30px;
+    display: flex;
+    align-items: center;
+}
+
+.div-1{
+    margin-top: 80px;
+    gap: 10px;
+}
+
+.div-1 > p{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 100%;
+}
+
+.div-1 .arrow{
+    font-size: 30px;
+}
