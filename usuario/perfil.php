@@ -1,61 +1,92 @@
 <?php
- // Contiene las variables de configuración para conectar a la base de datos
- require_once("conexion.php"); // Contiene la función que conecta a la base de datos
+session_start();
 
-// Supongamos que tienes el ID del empleado almacenado en una variable $id_empleado
-$id_empleado = 1; // Cambia esto según tu lógica
+// Verifica si el usuario tiene el rol de empleado
+if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'empleado') {
+    header('Location: login.php');
+    exit();
+}
 
-$query_empresa = mysqli_query($conn, "SELECT * FROM empleado WHERE id_empleado = $id_empleado");
-$row = mysqli_fetch_array($query_empresa);
+// Conecta a la base de datos (reemplaza con tus propias credenciales)
+require_once("conexion.php");
 
-mysqli_close($conn);
+// Obtiene el ID del empleado desde la sesión
+$id_empleado = $_SESSION['id_empleado'];
+
+// Verifica si se encontró el empleado
+if ($id_empleado === null) {
+    echo "Error: ID de empleado no encontrado.";
+    exit();
+}
+
+// Consulta para obtener los datos del empleado
+$consulta_empleado = "SELECT * FROM empleado WHERE id_empleado = $id_empleado";
+$resultado_empleado = mysqli_query($conn, $consulta_empleado);
+
+// Verifica si se encontró el empleado
+if ($resultado_empleado !== false && $resultado_empleado->num_rows === 1) {
+    $empleado = mysqli_fetch_assoc($resultado_empleado);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <!-- Agrega tus etiquetas de cabeza aquí -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Perfil</title>
     <style>
-        /* Estilos adicionales si es necesario */
-        .perfil-container {
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        h1 {
             text-align: center;
+            color: #333;
+        }
+        .perfil-container {
+            background-color: #fff;
+            padding: 20px;
             margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        /* Estilos para la imagen de perfil */
         .perfil-container img {
-            width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
-            height: 150px; /* Altura igual al ancho para mantener la forma redonda */
-            border-radius: 50%; /* Agrega un borde redondeado a la imagen de perfil */
-            margin-bottom: 10px;
-            border: 4px solid #fff; /* Agrega un borde blanco para resaltar la imagen */
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 4px solid #fff;
         }
+        /* Estilos para el formulario de imagen de perfil */
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        /* Estilos para la tabla de datos */
         table {
-            width: 70%;
-            margin: 0 auto; /* Centra la tabla en el contenedor */
+            width: 100%;
+            margin-top: 20px;
             border-collapse: collapse;
-            margin-top: 20px; /* Espaciado adicional entre la imagen y la tabla */
-            
-        }
-        table tr:nth-child(even) {
-            background-color: #f9f9f9; /* Color de fondo para las filas pares */
-        }
-        /* Estilo para las filas impares (si es necesario) */
-        table tr:nth-child(odd) {
-            background-color: #ffffff; /* Color de fondo para las filas impares */
         }
         table, th, td {
             border: 1px solid #ddd;
-            padding: 12px; /* Aumenta el espacio interno de las celdas */
+            padding: 12px;
             text-align: left;
         }
         th {
-            background-color: #f8f8f8; /* Un color más claro para encabezados de tabla */
+            background-color: #f8f8f8;
         }
-        /* Estilo para el botón en el formulario */
+        /* Estilos para el botón */
         button {
             padding: 10px 15px;
             background-color: #4caf50;
@@ -64,7 +95,6 @@ mysqli_close($conn);
             border-radius: 4px;
             cursor: pointer;
         }
-        /* Cambia el color del botón cuando se pasa el ratón */
         button:hover {
             background-color: #45a049;
         }
@@ -72,70 +102,69 @@ mysqli_close($conn);
 </head>
 
 <body>
-    <?php 
-        include '../includes/head.php'
-    ?>
-    
+    <?php include '../includes/head.php' ?>
+
     <h1>Perfil de Empleado</h1>
 
     <div class="perfil-container">
+        <!-- Puedes mostrar la imagen del perfil aquí -->
         <?php
-        if (!empty($row['imagen_perfil']) && file_exists($row['imagen_perfil'])) {
-            echo '<img src="./imagenes_perfil/' . basename($row['imagen_perfil']) . '" alt="Imagen de perfil">';
+        if (!empty($empleado['imagen_perfil']) && file_exists($empleado['imagen_perfil'])) {
+            echo '<img src="' . $empleado['imagen_perfil'] . '" alt="Imagen de perfil">';
         } else {
             echo '<p>Imagen no disponible</p>';
         }
         ?>
-        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data">
-            <!-- Otros campos del formulario -->
-
-            <label for="imagen_perfil">Imagen de Perfil:</label>
-            <input type="file" name="imagen_perfil" accept="image/*">
-
-            <button type="submit">Guardar Cambios</button>
-        </form>
 
         <table>
+            <!-- Muestra otros detalles del perfil aquí -->
             <tr>
                 <td><strong>Nombre y Apellido:</strong></td>
-                <td><?php echo $row['nombre'] . ' ' . $row['apellido']; ?></td>
+                <td><?php echo $empleado['nombre'] . ' ' . $empleado['apellido']; ?></td>
             </tr>
             <tr>
                 <td><strong>ID Cargo:</strong></td>
-                <td><?php echo $row['id_cargo']; ?></td>
+                <td><?php echo $empleado['id_cargo']; ?></td>
             </tr>
             <tr>
                 <td><strong>Género:</strong></td>
-                <td><?php echo $row['genero']; ?></td>
+                <td><?php echo $empleado['genero']; ?></td>
             </tr>
             <tr>
                 <td><strong>Fecha de Nacimiento:</strong></td>
-                <td><?php echo $row['fecha_nacimiento']; ?></td>
+                <td><?php echo $empleado['fecha_nacimiento']; ?></td>
             </tr>
             <tr>
                 <td><strong>Correo:</strong></td>
-                <td><?php echo $row['correo']; ?></td>
+                <td><?php echo $empleado['correo']; ?></td>
             </tr>
             <tr>
                 <td><strong>Teléfono:</strong></td>
-                <td><?php echo $row['telefono']; ?></td>
+                <td><?php echo $empleado['telefono']; ?></td>
             </tr>
             <tr>
                 <td><strong>Dirección:</strong></td>
-                <td><?php echo $row['direccion']; ?></td>
+                <td><?php echo $empleado['direccion']; ?></td>
             </tr>
             <tr>
                 <td><strong>Departamento:</strong></td>
-                <td><?php echo $row['departamento']; ?></td>
+                <td><?php echo $empleado['departamento']; ?></td>
             </tr>
             <tr>
                 <td><strong>Fecha de Contratación:</strong></td>
-                <td><?php echo $row['fecha_contratacion']; ?></td>
+                <td><?php echo $empleado['fecha_contratacion']; ?></td>
             </tr>
         </table>
     </div>
-
-
 </body>
 
 </html>
+
+<?php
+} else {
+    echo "Error al recuperar los datos del empleado";
+}
+
+// Cierra la conexión
+mysqli_close($conn);
+?>
