@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -78,8 +77,16 @@ CREATE TABLE `empleado` (
   `departamento` varchar(255) DEFAULT NULL,
   `id_supervisor` int(11) DEFAULT NULL,
   `id_departamento` int(11) DEFAULT NULL,
-  `id_cargo` int(11) DEFAULT NULL
+  `id_cargo` int(11) DEFAULT NULL,
+  `imagen_perfil` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `empleado`
+--
+
+INSERT INTO `empleado` (`id_empleado`, `nombre`, `apellido`, `fecha_nacimiento`, `genero`, `direccion`, `telefono`, `correo`, `fecha_contratacion`, `salario`, `cargo`, `departamento`, `id_supervisor`, `id_departamento`, `id_cargo`, `imagen_perfil`) VALUES
+(1, 'jose', 'penadillo', '2003-04-04 15:41:48', 'masculino', 'los vencedores', 931030080, 'jose@gmail.com', '2023-11-01 15:41:48', 500, 'desarrollador', 'lima', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -105,7 +112,6 @@ CREATE TABLE `historial_laboral` (
   `id_empleado` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 -- --------------------------------------------------------
 
 --
@@ -118,8 +124,18 @@ CREATE TABLE `solicitudes_permiso` (
   `motivo` varchar(100) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
-  `estado` varchar(200) NOT NULL
+  `id_empleado` int(11) DEFAULT NULL,
+  `estado` varchar(255) NOT NULL DEFAULT 'Pendiente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `solicitudes_permiso`
+--
+
+INSERT INTO `solicitudes_permiso` (`id`, `nombre`, `motivo`, `fecha_inicio`, `fecha_fin`, `id_empleado`, `estado`) VALUES
+(7, '0', '0', '2023-11-25', '0000-00-00', NULL, 'Pendiente'),
+(8, '0', '0', '2023-11-16', '0000-00-00', NULL, 'Pendiente'),
+(9, 'jose', 'lesion', '2023-12-09', '2023-12-27', NULL, 'Pendiente');
 
 -- --------------------------------------------------------
 
@@ -134,6 +150,28 @@ CREATE TABLE `supervisor` (
   `telefono` int(11) DEFAULT NULL,
   `correo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre_usuario` varchar(50) NOT NULL,
+  `contrasena` varchar(255) NOT NULL,
+  `rol` enum('admin','empleado') NOT NULL,
+  `id_empleado` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre_usuario`, `contrasena`, `rol`, `id_empleado`) VALUES
+(1, 'jose', 'abretesesamo', 'empleado', 1),
+(2, 'admin', 'milei', 'admin', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -161,7 +199,7 @@ ALTER TABLE `departamento`
 -- Indices de la tabla `empleado`
 --
 ALTER TABLE `empleado`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_empleado`),
   ADD KEY `id_supervisor` (`id_supervisor`),
   ADD KEY `id_departamento` (`id_departamento`),
   ADD KEY `id_cargo` (`id_cargo`);
@@ -181,10 +219,47 @@ ALTER TABLE `historial_laboral`
   ADD KEY `id_empleado` (`id_empleado`);
 
 --
+-- Indices de la tabla `solicitudes_permiso`
+--
+ALTER TABLE `solicitudes_permiso`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_empleado` (`id_empleado`);
+
+--
 -- Indices de la tabla `supervisor`
 --
 ALTER TABLE `supervisor`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nombre_usuario` (`nombre_usuario`),
+  ADD KEY `fk_usuarios_empleado` (`id_empleado`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `empleado`
+--
+ALTER TABLE `empleado`
+  MODIFY `id_empleado` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `solicitudes_permiso`
+--
+ALTER TABLE `solicitudes_permiso`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
@@ -202,14 +277,26 @@ ALTER TABLE `empleado`
 -- Filtros para la tabla `empleado_beneficio`
 --
 ALTER TABLE `empleado_beneficio`
-  ADD CONSTRAINT `empleado_beneficio_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id`),
+  ADD CONSTRAINT `empleado_beneficio_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`),
   ADD CONSTRAINT `empleado_beneficio_ibfk_2` FOREIGN KEY (`id_beneficio`) REFERENCES `beneficios` (`id`);
 
 --
 -- Filtros para la tabla `historial_laboral`
 --
 ALTER TABLE `historial_laboral`
-  ADD CONSTRAINT `historial_laboral_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id`);
+  ADD CONSTRAINT `historial_laboral_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`);
+
+--
+-- Filtros para la tabla `solicitudes_permiso`
+--
+ALTER TABLE `solicitudes_permiso`
+  ADD CONSTRAINT `solicitudes_permiso_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `fk_usuarios_empleado` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
